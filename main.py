@@ -54,8 +54,17 @@ def root():
 def list_users(db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
     return db.query(models.User).all()
 
+@app.get("/api/v1/users/{user_id}", tags=["users"])
+def obtain_user(user_id: int, db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
+    user_model = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if user_model is None:
+        raise HTTPException(status_code=404, detail=f"ID {user_id} : Does not exist")
+
+    return user_model
+
+
 @app.post("/api/v1/users/", tags=["users"])
-def create_book(user: User, db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
+def create_user(user: User, db: Session = Depends(get_db), api_key: str = Depends(get_api_key)):
     existing_user = db.query(models.User).filter(models.User.user_email == user.user_email).first()
     if existing_user:
         raise HTTPException(status_code=409,
