@@ -68,6 +68,11 @@ For example, in mine it gives:
 ]
 ```
 
+##### GET with id
+
+Returns just the body of the user that matches the id, if it does not find the id, it gives an error.
+
+
 ##### POST
 
 Creates a new user given the body and the parameters. It only accepts email types and unique values there. So it will not accept a duplicate in email. Remember to follow the structure.
