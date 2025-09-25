@@ -67,6 +67,9 @@ For example, in mine it gives:
   }
 ]
 ```
+##### GET with id
+
+Returns just the body of the user that matches the id, if it does not find the id, it gives an error.
 
 ##### POST
 
